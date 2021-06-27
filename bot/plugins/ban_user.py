@@ -1,4 +1,3 @@
-z
 
 from pyrogram import (
     Client,
