@@ -14,10 +14,10 @@ from bs4 import BeautifulSoup
 
 @Bot.on_message(
     filters.command(MATHS_COMMAND, COMMM_AND_PRE_FIX)
-    & uszkhvis_chats_ahndler([AUTH_CHANNEL])
+    & uszkhvis_chats_ahndler([AUTH_CHANNEL]))
 
 
-   async def grs(client, message):
+async def grs(client, message):
    
         return
     query = urllib.parse.quote_plus(query)
