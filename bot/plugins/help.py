@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from bs4 import from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 from bot import AUTH_CHANNEL, COMMM_AND_PRE_FIX, HELP_COMMAND
 from bot.bot import Bot
 from bot.hf.flifi import uszkhvis_chats_ahndler
