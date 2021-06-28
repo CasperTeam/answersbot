@@ -8,6 +8,7 @@ from pyrogram.types import (
 from bot import (
     AUTH_CHANNEL,
     COMMM_AND_PRE_FIX,
+    HELP_COMMAND,
     IS_BLACK_LIST_ED_MESSAGE_TEXT,
     START_COMMAND
 )

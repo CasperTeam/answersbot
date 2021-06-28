@@ -14,7 +14,9 @@ from bot import (
     START_COMMAND,
     START_OTHER_USERS_TEXT,
     TG_BOT_TOKEN,
-    TG_BOT_WORKERS
+    TG_BOT_WORKERS,
+    DEFAULT_HELP_TEXT,
+    HELP_COMMAND
 )
 
 
@@ -35,6 +37,30 @@ class Bot(Client):
         )
         self.LOGGER = LOGGER
 
+    async def help(self):
+        await super().help()
+        usr_bot_me = await self.get_me()
+        self.set_parse_mode("html")
+        try:
+            check_m = await self.get_messages(
+                chat_id=AUTH_CHANNEL,
+                message_ids=DEFAULT_HELP_TEXT,
+                replies=0
+            )
+        except ValueError:
+            self.commandi[HELP_COMMAND] = DEFAULT_HELP_TEXT
+        else:
+            if check_m:
+                self.commandi[HELP_COMMAND] = check_m.text.html
+        self.LOGGER(__name__).info(
+            f"@{usr_bot_me.username} based on Pyrogram v{__version__} "
+            "Try /help."
+        )
+
+    async def stop(self, *args):
+        await super().stop()
+        self.LOGGER(__name__).info("NoPMsBot stopped. Bye.")
+        
     async def start(self):
         await super().start()
         usr_bot_me = await self.get_me()
@@ -52,9 +78,4 @@ class Bot(Client):
                 self.commandi[START_COMMAND] = check_m.text.html
         self.LOGGER(__name__).info(
             f"@{usr_bot_me.username} based on Pyrogram v{__version__} "
-            "Try /start."
-        )
-
-    async def stop(self, *args):
-        await super().stop()
-        self.LOGGER(__name__).info("NoPMsBot stopped. Bye.")
+            "Try /start.")

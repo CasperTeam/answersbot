@@ -15,7 +15,8 @@ from bot import (
     COMMM_AND_PRE_FIX,
     DERP_USER_S_TEXT,
     START_COMMAND,
-    UN_BAN_COMMAND
+    UN_BAN_COMMAND,
+    HELP_COMMAND
 )
 from bot.hf.fic import vhkzuoi_repliz_handler
 from bot.hf.flifi import uszkhvis_chats_ahndler
@@ -32,6 +33,7 @@ from bot.sql.users_sql import (
     ~filters.command(START_COMMAND, COMMM_AND_PRE_FIX) &
     ~filters.command(BAN_COMMAND, COMMM_AND_PRE_FIX) &
     ~filters.command(UN_BAN_COMMAND, COMMM_AND_PRE_FIX) &
+    ~filters.command(HELP_COMMAND, COMMM_AND_PRE_FIX) &
     uszkhvis_chats_ahndler([AUTH_CHANNEL]) &
     vhkzuoi_repliz_handler
 )
@@ -78,7 +80,7 @@ async def send_message_to_user(
             file_id=file_id,
             caption=caption,
             reply_markup=message.reply_markup,
-            disable_notification=True,
+            disable_notification=False,
             reply_to_message_id=reply_message_id
         )
     else:
@@ -90,6 +92,6 @@ async def send_message_to_user(
             text=caption,
             disable_web_page_preview=True,
             reply_markup=message.reply_markup,
-            disable_notification=True,
+            disable_notification=False,
             reply_to_message_id=reply_message_id
         )

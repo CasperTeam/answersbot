@@ -10,8 +10,10 @@ from pyrogram.types import (
 from bot import (
     AUTH_CHANNEL,
     COMMM_AND_PRE_FIX,
+    DEFAULT_HELP_TEXT,
     ONLINE_CHECK_START_TEXT,
-    START_COMMAND
+    START_COMMAND,
+    HELP_COMMAND
 )
 from bot.bot import Bot
 from bot.hf.flifi import uszkhvis_chats_ahndler
@@ -35,5 +37,26 @@ async def num_start_message(client: Bot, message: Message):
 async def nimda_start_message(_, message: Message):
     await message.reply_text(
         ONLINE_CHECK_START_TEXT,
+        quote=True
+    )
+
+@Bot.on_message(
+    filters.command(HELP_COMMAND, COMMM_AND_PRE_FIX) &
+    ~uszkhvis_chats_ahndler([AUTH_CHANNEL])
+)
+async def num_start_message(client: Bot, message: Message):
+    await message.reply_text(
+        client.commandi[HELP_COMMAND],
+        quote=True
+    )
+
+
+@Bot.on_message(
+    filters.command(HELP_COMMAND, COMMM_AND_PRE_FIX) &
+    uszkhvis_chats_ahndler([AUTH_CHANNEL])
+)
+async def nimda_start_message(_, message: Message):
+    await message.reply_text(
+        DEFAULT_HELP_TEXT,
         quote=True
     )

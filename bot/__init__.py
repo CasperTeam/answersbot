@@ -43,6 +43,7 @@ BAN_COMMAND = get_config("BAN_COMMAND", "ban")
 UN_BAN_COMMAND = get_config("UN_BAN_COMMAND", "unban")
 # start command
 START_COMMAND = get_config("START_COMMAND", "start")
+HELP_COMMAND = get_config("HELP_COMMAND", help)
 # broadcast command
 BROADCAST_COMMAND = get_config("BROADCAST_COMMAND","broadcast")
 HELP_COMMAND = ("help")
@@ -61,6 +62,9 @@ DEFAULT_START_TEXT = (
     "please dont flood me "
     "if any for the bot to function.\n\n\n"
     "ℹ️ Subscribe @t24talkies if you 😍 using this bot❗️❣️"
+)
+DEFAULT_HELP_TEXT = (
+    "np help for now check next week"
 )
 # /start message when other users start your bot
 START_OTHER_USERS_TEXT = int(get_config(
