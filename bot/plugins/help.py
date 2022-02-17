@@ -28,6 +28,6 @@ async def sheet(client: Bot, message: Message):
     "New Features Will Come bu for next batch."
     "ℹ️ Thanks 😍 for using this bot❗️❣️"
     )  
-    await message.reply_text(DEFAULT_START_TEXT, reply_markup="md")
+    await message.reply_text(DEFAULT_START_TEXT)
 
     
