@@ -26,7 +26,7 @@ async def sheet(client: Bot, message: Message):
     "2. dont edit or delete messages "
     "3. **Dont Spam!** \n\n\n"
     "New Features Will Come bu for next batch."
-    "ℹ️ Subscribe @t24jeetalk 😍 for using this bot❗️❣️"
+    "ℹ️ Thanks 😍 for using this bot❗️❣️"
     )  
     await message.reply_text(DEFAULT_START_TEXT, reply_markup="md")
 
