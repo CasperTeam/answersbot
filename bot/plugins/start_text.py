@@ -20,7 +20,7 @@ from bot.hf.flifi import uszkhvis_chats_ahndler
 
 
 @Bot.on_message(
-    filters.command(START_COMMAND, COMMM_AND_PRE_FIX)
+    filters.command("start", COMMM_AND_PRE_FIX)
 )
 
 async def nimda_start_message(c, m):
