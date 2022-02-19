@@ -21,7 +21,7 @@ async def start(client: Bot, message: Message):
     "Thank you for using me.\n\n"
     "This is abot to contact admins! \n\n\n"
     "Google Sheets Link -> /sheet \n\n\n"
-    "**Rules for using this bot:** "
+    "**Rules for using this bot:\n\n** "
     "1. Ask your question Directly \n"
     "2. dont edit or delete messages\n"
     "3. **Dont Spam!** \n\n\n"
