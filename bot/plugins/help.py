@@ -15,7 +15,7 @@ async def sheet(client: Bot, message: Message):
 @Bot.on_message(
     filters.command("start")
 )
-async def sheet(client: Bot, message: Message):
+async def start(client: Bot, message: Message):
     DEFAULT_START_TEXT = (
     "Hi. ☺️\n"
     "Thank you for using me.\n\n"
