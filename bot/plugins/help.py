@@ -16,7 +16,7 @@ async def sheet(client: Bot, message: Message):
     filters.command("start")
 )
 async def start(client: Bot, message: Message):
-    B = InlineKeyboardMarkup(InlineKeyboardButton[text="Sheets",url="https://ourclg.tech/sheet.php"])
+    B = InlineKeyboardMarkup([[InlineKeyboardButton(text='Sheets', url='https://ourclg.tech/s.php')]])
     DEFAULT_START_TEXT = (
     "Hi. ☺️\n"
     "Thank you for using me.\n\n"
