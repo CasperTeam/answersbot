@@ -1,5 +1,5 @@
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from bs4 import BeautifulSoup
 from bot import COMMM_AND_PRE_FIX, HELP_COMMAND
 from bot.bot import Bot
@@ -9,13 +9,14 @@ from bot.bot import Bot
     filters.command("sheet", COMMM_AND_PRE_FIX)
 )
 async def sheet(client: Bot, message: Message):
-    await message.reply_text("https://docs.google.com/spreadsheets/d/1Iuz971A-HmOQBf3y005XBO3XCEpsJZly2GL8Cc6Gar0/edit?usp=drivesdk")
+    await message.reply_text("https://ourclg.tech/sheet.php",disable_web_page_preview=True)
 
     
 @Bot.on_message(
     filters.command("start")
 )
 async def start(client: Bot, message: Message):
+    B = InlineKeyboardMarkup(InlineKeyboardButton[text="Sheets",url="https://ourclg.tech/sheet.php"])
     DEFAULT_START_TEXT = (
     "Hi. ☺️\n"
     "Thank you for using me.\n\n"
@@ -28,6 +29,6 @@ async def start(client: Bot, message: Message):
     "New Features Will Come bu for next batch."
     "ℹ️ Thanks 😍 for using this bot❗️❣️"
     )  
-    await message.reply_text(DEFAULT_START_TEXT, parse_mode="md") 
+    await message.reply_text(DEFAULT_START_TEXT,reply_markup=B, parse_mode="md") 
 
     
