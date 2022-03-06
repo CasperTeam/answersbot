@@ -1,3 +1,4 @@
+from cgi import parse_header
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from bs4 import BeautifulSoup
@@ -85,13 +86,13 @@ async def grt(c,m):
         ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
         hn = l.acell(id).value
         knn = """
-        Name:{}
-        Url:{}"""
+**Name: ** `{}`
+**Url : ** `{}`"""
         dmn = "https://da.gd/s?url={}"
         l1 = requests.get(dmn.format(ob)).text
         btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download', callback_data='dl|'+l1), InlineKeyboardButton(text='Link', url=l1)]])
-        await k.edit_text(knn.format(hn,ob))
+        await k.edit_text(knn.format(hn,ob),reply_markup=btnn, parse_mode="md")
     except Exception as e:
-            await k.edit_text(e)
+            await m.reply_text(e)
    else :
         await m.reply_text("Error: please follow pattern explained in /help .")
