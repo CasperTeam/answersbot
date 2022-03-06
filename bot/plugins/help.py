@@ -85,6 +85,6 @@ async def grt(c,m):
         ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
         await k.edit_text(ob)
     except Exception as e:
-            await m.reply_text(e)
+            await k.edit_text(e)
    else :
         await m.reply_text("Error: please follow pattern explained in /help .")
