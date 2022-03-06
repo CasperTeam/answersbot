@@ -89,8 +89,9 @@ async def grt(c,m):
 **Name: ** `{}`
 **Url : ** `{}?a=view`"""
         btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download', callback_data='dl_'+cellRange), InlineKeyboardButton(text='Link', url=ob)]])
-        await k.edit_text(knn.format(hn,ob), parse_mode="md")
+       
+        await k.edit_text(knn.format(hn,ob), parse_mode="md", reply_markup=btnn)
     except Exception as e:
-            await m.reply_text(e)
+            await m.reply_text("Error: "+e)
    else :
         await m.reply_text("Error: please follow pattern explained in /help .")
