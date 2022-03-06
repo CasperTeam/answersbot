@@ -91,7 +91,7 @@ async def grt(c,m):
         dmn = "https://da.gd/s?url={}"
         l1 = requests.get(dmn.format(ob)).text
         btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download', callback_data='dl|'+l1), InlineKeyboardButton(text='Link', url=l1)]])
-        await k.edit_text(knn.format(hn,ob),reply_markup=btnn, parse_mode="md")
+        await k.edit_text(knn.format(hn,ob), parse_mode="md")
     except Exception as e:
             await m.reply_text(e)
    else :
