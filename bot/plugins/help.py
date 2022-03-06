@@ -67,5 +67,7 @@ async def grt(c,m):
      await m.reply_text(
         id,
         quote=True)
+     await m.continue_propagation()
     except Exception as e:
         await m.reply_text(e)
+        await m.continue_propagation()
