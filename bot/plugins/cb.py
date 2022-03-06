@@ -26,7 +26,7 @@ import urllib.parse
 from urllib.parse import unquote_plus
 import math
 from pySmartDL import SmartDL
-import datetime
+from datetime import datetime
 credentials = {
   "type": "service_account",
   "project_id": "gdriveuserge",
@@ -127,4 +127,6 @@ async def cdata(c, q):
                         estimated_total_time)
                     await message.edit(progress_str, disable_web_page_preview=True)
                     await asyncio.sleep(10)
-            return dl_loc, (datetime.now() - start_t).seconds
+            
+                    await client.send_document(q.from_user.id, custom_file_name)
+                    return dl_loc, (datetime.now() - start_t).seconds
