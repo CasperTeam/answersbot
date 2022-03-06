@@ -65,28 +65,27 @@ async def cdata(c, q):
     data = q.data
     if data.startswith("dl_"):
 
-         link = data.split("_", 1)[1]
-         cellRange = link #str(input("id?"))  # Please set the range with A1Notation. In this case, the hyperlink of the cell "A1" of "Sheet1" is retrieved.
+            link = data.split("_", 1)[1]
+            cellRange = link #str(input("id?"))  # Please set the range with A1Notation. In this case, the hyperlink of the cell "A1" of "Sheet1" is retrieved.
 #val = l.acell(cellRange).value
 
 # 1. Retrieve the access token.
-         access_token = sa.auth.token
+            access_token = sa.auth.token
 
 # 2. Requst to the method of spreadsheets.get in Sheets API using `requests` module.
-         fields = "sheets(data(rowData(values(hyperlink))))"
-         url = "https://sheets.googleapis.com/v4/spreadsheets/" + si + "?ranges=" + urllib.parse.quote(cellRange) + "&fields=" + urllib.parse.quote(fields)
-         res = requests.get(url, headers={"Authorization": "Bearer " + access_token})
+            fields = "sheets(data(rowData(values(hyperlink))))"
+            url = "https://sheets.googleapis.com/v4/spreadsheets/" + si + "?ranges=" + urllib.parse.quote(cellRange) + "&fields=" + urllib.parse.quote(fields)
+            res = requests.get(url, headers={"Authorization": "Bearer " + access_token})
 
 # 3. Retrieve the hyperlink.
-         obj = res.json()
+            obj = res.json()
 #print(obj)
-         ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
+            ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
          #await c.send_video(q.from_user.id, video=ob)
          #await c.send_document(q.from_user.id, document=ob, )
-         message = await c.send_message(q.from_user.id,"`Downloading...`")
-         start_t = datetime.now()
-         custom_file_name = unquote_plus(os.path.basename(url))
-         async def url_download(message: Message, url: str) -> Tuple[str, int]:
+            message = await c.send_message(q.from_user.id,"`Downloading...`")
+            start_t = datetime.now()
+            custom_file_name = unquote_plus(os.path.basename(url))
             if "|" in url:
              url, c_file_name = url.split("|", maxsplit=1)
              url = ob
