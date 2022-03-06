@@ -64,10 +64,12 @@ async def grt(c,m):
     try:
      fur = m.text
      id = fur.split(" ", 1)[1]
-     await m.reply_text(
+     if id == "":
+         await m.reply_text("Error: please follow pattern explained in /help .")
+     elif id != "":
+      await m.reply_text(
         id,
         quote=True)
-     await m.continue_propagation()
     except Exception as e:
         await m.reply_text(e)
-        await m.continue_propagation()
+        
