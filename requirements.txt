@@ -7,3 +7,5 @@ Pillow
 python-dotenv>=0.10
 requests
 gspread
+pySmartDL
+DateTime
