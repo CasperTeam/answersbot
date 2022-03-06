@@ -61,15 +61,14 @@ async def start(client: Bot, message: Message):
     filters.command("get", COMMM_AND_PRE_FIX)
 )
 async def grt(c,m):
-    try:
-     fur = m.text
-     id = fur.split(" ", 1)[1]
-     if id == "":
-         await m.reply_text("Error: please follow pattern explained in /help .")
-     elif id != "":
-      await m.reply_text(
-        id,
-        quote=True)
-    except Exception as e:
-        await m.reply_text(e)
-        
+    if " " in m.text:
+        try:
+         fur = m.text
+         id = fur.split(" ", 1)[1]
+         await m.reply_text(
+            id,
+            quote=True)
+        except Exception as e:
+            await m.reply_text(e)
+    else :
+        await m.reply_text("Error: please follow pattern explained in /help .")
