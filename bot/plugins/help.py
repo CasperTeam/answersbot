@@ -61,9 +61,11 @@ async def start(client: Bot, message: Message):
     filters.command("get", COMMM_AND_PRE_FIX)
 )
 async def grt(c,m):
-    fur = c.text
-    id = fur.split(" ", 1)[1]
-    await m.reply_text(
+    try:
+     fur = m.text
+     id = fur.split(" ", 1)[1]
+     await m.reply_text(
         id,
-        quote=True
-    )
+        quote=True)
+    except Exception as e:
+        await m.reply_text(e)
