@@ -88,10 +88,10 @@ async def grt(c,m):
         knn = """
 **Name: ** `{}`
 **Url : ** `{}?a=view`"""
-        btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download', callback_data='dl_'+cellRange), InlineKeyboardButton(text='Link', url=ob)]])
+        btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download', callback_data='dl_'+cellRange), InlineKeyboardButton(text='Link', url=ob+"?a=view")]])
        
         await k.edit_text(knn.format(hn,ob), parse_mode="md", reply_markup=btnn)
     except Exception as e:
-            await m.reply_text("Error: "+e)
+            await m.reply_text("Error!")
    else :
         await m.reply_text("Error: please follow pattern explained in /help .")
