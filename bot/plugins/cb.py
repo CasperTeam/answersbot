@@ -66,7 +66,7 @@ async def cdata(c, q):
     if data.startswith("dl_"):
 
             link = data.split("_", 1)[1]
-            cellRange = link #str(input("id?"))  # Please set the range with A1Notation. In this case, the hyperlink of the cell "A1" of "Sheet1" is retrieved.
+            cellRange = link.replace("vid.ourclg.tech","clg.cplas.workers.dev") #str(input("id?"))  # Please set the range with A1Notation. In this case, the hyperlink of the cell "A1" of "Sheet1" is retrieved.
 #val = l.acell(cellRange).value
 
 # 1. Retrieve the access token.
