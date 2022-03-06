@@ -92,6 +92,6 @@ async def grt(c,m):
        
         await k.edit_text(knn.format(hn,ob), parse_mode="md", reply_markup=btnn)
     except Exception as e:
-            await m.reply_text("Error!")
+            await m.reply_text(e)
    else :
         await m.reply_text("Error: please follow pattern explained in /help .")
