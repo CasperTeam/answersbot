@@ -84,13 +84,13 @@ async def grt(c,m):
 #print(obj)
         ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
         hn = l.acell(id).value
-        k = """
+        knn = """
         Name:{}
         Url:{}"""
         dmn = "https://da.gd/s?url={}"
         l1 = requests.get(dmn.format(ob)).text
         btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download', callback_data='dl|'+l1), InlineKeyboardButton(text='Link', url=l1)]])
-        await k.edit_text(k.format(hn,ob),)
+        await k.edit_text(knn.format(hn,ob))
     except Exception as e:
             await k.edit_text(e)
    else :
