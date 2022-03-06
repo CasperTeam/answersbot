@@ -29,7 +29,8 @@ async def nimda_start_message(c, m):
     "Thank you for using me.\n\n"
     "This is abot to contact admins! \n\n\n"
     "Google Sheets Link -> /sheet \n\n\n"
-    "**Rules for using this bot:** "
+    "**Rules for using this bot:**"
+    
     "1. Ask your question Directly "
     "2. dont edit or delete messages "
     "3. **Dont Spam!** \n\n\n"
@@ -58,3 +59,10 @@ async def nimda_start_message(_, message: Message):
         DEFAULT_HELP_TEXT,
         quote=True
     )
+@Bot.on_message(filters.text(["hi","hello"]))
+async def hi(client: Bot, message: Message):
+    await message.reply_text(
+        "Hey bro Wassup?!",
+        quote=True
+    )
+    await message.continue_propagation()
