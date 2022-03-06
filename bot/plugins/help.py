@@ -61,14 +61,30 @@ async def start(client: Bot, message: Message):
     filters.command("get", COMMM_AND_PRE_FIX)
 )
 async def grt(c,m):
-    if " " in m.text:
-        try:
-         fur = m.text
-         id = fur.split(" ", 1)[1]
-         await m.reply_text(
+   if " " in m.text:
+    try:
+        fur = m.text
+        id = fur.split(" ", 1)[1]
+        k = await m.reply_text(
             id,
             quote=True)
-        except Exception as e:
+        cellRange = id #str(input("id?"))  # Please set the range with A1Notation. In this case, the hyperlink of the cell "A1" of "Sheet1" is retrieved.
+#val = l.acell(cellRange).value
+
+# 1. Retrieve the access token.
+        access_token = sa.auth.token
+
+# 2. Request to the method of spreadsheets.get in Sheets API using `requests` module.
+        fields = "sheets(data(rowData(values(hyperlink))))"
+        url = "https://sheets.googleapis.com/v4/spreadsheets/" + si + "?ranges=" + urllib.parse.quote(cellRange) + "&fields=" + urllib.parse.quote(fields)
+        res = requests.get(url, headers={"Authorization": "Bearer " + access_token})
+
+# 3. Retrieve the hyperlink.
+        obj = res.json()
+#print(obj)
+        ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
+        await k.edit_text(ob)
+    except Exception as e:
             await m.reply_text(e)
-    else :
+   else :
         await m.reply_text("Error: please follow pattern explained in /help .")
