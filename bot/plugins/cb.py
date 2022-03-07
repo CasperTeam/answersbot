@@ -60,7 +60,7 @@ def humanbytes(size: float) -> str:
     return "{:.2f} {}B".format(size, power_dict[t_n])
 
 
-@Bot.on_callback_query()
+@Bot.on_message(filters.command("dl"))
 async def cdata(c, q):
     data = q.data
     if data.startswith("dl_"):

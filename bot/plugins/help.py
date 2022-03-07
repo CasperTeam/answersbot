@@ -42,6 +42,34 @@ async def sheet(client: Bot, message: Message):
     filters.command("start")
 )
 async def start(client: Bot, message: Message):
+    txt = message.text
+    if " " in txt:
+        try:
+            link = txt.split("_", 1)[1]
+            cellRange = link #str(input("id?"))  # Please set the range with A1Notation. In this case, the hyperlink of the cell "A1" of "Sheet1" is retrieved.
+#val = l.acell(cellRange).value
+
+# 1. Retrieve the access token.
+            access_token = sa.auth.token
+
+# 2. Requst to the method of spreadsheets.get in Sheets API using `requests` module.
+            fields = "sheets(data(rowData(values(hyperlink))))"
+            url = "https://sheets.googleapis.com/v4/spreadsheets/" + si + "?ranges=" + urllib.parse.quote(cellRange) + "&fields=" + urllib.parse.quote(fields)
+            res = requests.get(url, headers={"Authorization": "Bearer " + access_token})
+
+# 3. Retrieve the hyperlink.
+            obj = res.json()
+#print(obj)
+            ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
+            obf= ob.replace("vid.ourclg.tech","cc.cplas.workers.dev")
+         #await c.send_video(q.from_user.id, video=ob)
+         #await c.send_document(q.from_user.id, document=ob, )
+            message = await client.send_message(message.chat.id,txt+" "+obf+"?a=view")
+
+
+
+
+
     B = InlineKeyboardMarkup([[InlineKeyboardButton(text='Sheets', url='https://ourclg.tech/s.php')]])
     DEFAULT_START_TEXT = (
     "Hi. ☺️\n"
