@@ -67,7 +67,7 @@ async def start(client: Bot, message: Message):
             obf= ob.replace("vid.ourclg.tech","cc.cplas.workers.dev")
          #await c.send_video(q.from_user.id, video=ob)
          #await c.send_document(q.from_user.id, document=ob, )
-            message = await client.send_message(message.chat.id,txt+" "+obf+"?a=view")
+            message = await client.send_message(message.chat.id,obf+"?a=view")
             
             url = obf
 
@@ -78,7 +78,7 @@ async def start(client: Bot, message: Message):
             k=r.headers.get('content-type')
             with open(fn,'wb') as f:
                 f.write(r.content)
-            await client.send_message(message.chat.id,fn)
+            await client.send_document(message.chat.id,fn)
 
             
         except Exception as e:
