@@ -38,7 +38,7 @@ l = sh.worksheet("JEE ULTIMATE")
 access_token = sa.auth.token
 fields = "sheets(data(rowData(values(hyperlink))))"
 disk = psutil.disk_usage("/").percent
-free = psutil.disk_usage(".").free
+free = psutil.disk_usage(".").free/100000000
 bot_start_time = time.time()
 def get_readable_time(seconds: int) -> int:
     """Get Time So That Human Can ReadIt"""
@@ -108,6 +108,7 @@ async def start(client: Bot, message: Message):
             await mss.edit_text("Downloading!")
             with c.request('GET', lk, preload_content=False) as res, open(filename, 'wb') as out_file:
               shutil.copyfileobj(res, out_file)
+            await mss.edit_text("Uploading!")
             dc = await client.send_document(message.chat.id,fn)
             await mss.delete()
             fwd = await client.forward_messages(-1001579836800, message.from_user.id,dc.message_id)
@@ -117,7 +118,7 @@ async def start(client: Bot, message: Message):
             {}"""
             k = idxkk.format(fn,message.from_user.mention,message.from_user.id)
             btnk = InlineKeyboardMarkup([[InlineKeyboardButton(text='here', url='https://t.me/c/1579836800/{}'.format(fwd.message_id))]])
-            await client.send_message(-1001579836800,k,parse_mode="md",reply_markup=btnk)
+            await client.send_message(-1001579836800,k,parse_mode="html",reply_markup=btnk)
             
 
             
