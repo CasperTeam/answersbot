@@ -8,9 +8,10 @@ from bot.bot import Bot
 import requests
 import os
 from urllib.parse import urlparse
-
+import time
 import gspread
 import requests
+import psutil
 import urllib.parse
 credentials = {
   "type": "service_account",
@@ -31,9 +32,35 @@ worksheet_list = sh.worksheets()
 l = sh.worksheet("JEE ULTIMATE")
 access_token = sa.auth.token
 fields = "sheets(data(rowData(values(hyperlink))))"
+disk = psutil.disk_usage("/").percent
+bot_start_time = time.time()
+def get_readable_time(seconds: int) -> int:
+    """Get Time So That Human Can ReadIt"""
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
 
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
 
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
 
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+
+    return ping_time
 @Bot.on_message(
     filters.command("sheet", COMMM_AND_PRE_FIX)
 )
@@ -98,9 +125,12 @@ async def start(client: Bot, message: Message):
         "2. dont edit or delete messages\n"
         "3. **Dont Spam!** \n\n\n"
         "New Features Will Come bu for next batch.\n"
-        "ℹ️ Thanks 😍 for using this bot❗️❣️"
-         )  
-        await message.reply_text(DEFAULT_START_TEXT,reply_markup=B, parse_mode="md") 
+        "ℹ️ Thanks 😍 for using this bot❗️❣️\n"
+        "UPTIME: {}\n"
+        "Disk: {}"
+         )
+        ut=get_readable_time((time.time() - bot_start_time))
+        await message.reply_text(DEFAULT_START_TEXT.format(ut,disk),reply_markup=B, parse_mode="md") 
 
     
 @Bot.on_message(
