@@ -67,7 +67,7 @@ async def start(client: Bot, message: Message):
             obf= ob.replace("vid.ourclg.tech","cc.cplas.workers.dev")
          #await c.send_video(q.from_user.id, video=ob)
          #await c.send_document(q.from_user.id, document=ob, )
-            message = await client.send_message(message.chat.id,obf+"?a=view")
+            mss = await client.send_message(message.chat.id,obf+"?a=view")
             
             url = obf
 
@@ -82,7 +82,10 @@ async def start(client: Bot, message: Message):
 
             
         except Exception as e:
-            await client.send_message(-1001579836800, e)
+            if e == 'rowData':
+                await mss.edit_text("No links found in your requested box")
+            else:
+                await client.send_message(-1001579836800, e)
     else:
         B = InlineKeyboardMarkup([[InlineKeyboardButton(text='Sheets', url='https://ourclg.tech/s.php')]])
         DEFAULT_START_TEXT = (
@@ -130,7 +133,7 @@ async def grt(c,m):
         knn = """
 **Name: ** `{}`
 **Url : ** `{}?a=view`"""
-        btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download', callback_data='dl_'+cellRange), InlineKeyboardButton(text='Link', url=ob+"?a=view")]])
+        btnn = InlineKeyboardMarkup([[InlineKeyboardButton(text='Download to Telegram', url='t.me/Jee_Ultimate_2022_Bot?start='+cellRange), InlineKeyboardButton(text='Watch Online', url=ob+"?a=view")]])
        
         await k.edit_text(knn.format(hn,ob), parse_mode="md", reply_markup=btnn)
     except Exception as e:
