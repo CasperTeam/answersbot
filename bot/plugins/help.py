@@ -141,3 +141,8 @@ async def grt(c,m):
             await c.send_message(-1001579836800, e)
    else :
         await m.reply_text("Error: please follow pattern explained in /help .")
+@Bot.on_message(filters.command("restart"))
+async def rest(c,m):
+    k = await m.reply_text("Restarted!")
+    os.system("python3 -m bot")
+    await m.reply_text("ok")
