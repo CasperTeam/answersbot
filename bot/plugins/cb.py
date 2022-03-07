@@ -60,72 +60,8 @@ def humanbytes(size: float) -> str:
     return "{:.2f} {}B".format(size, power_dict[t_n])
 
 
-@Bot.on_message(filters.command("dl"))
+@Bot.on_callback_query()
 async def cdata(c, q):
     data = q.data
     if data.startswith("dl_"):
-
-            link = data.split("_", 1)[1]
-            cellRange = link.replace("vid.ourclg.tech","cc.cplas.workers.dev") #str(input("id?"))  # Please set the range with A1Notation. In this case, the hyperlink of the cell "A1" of "Sheet1" is retrieved.
-#val = l.acell(cellRange).value
-
-# 1. Retrieve the access token.
-            access_token = sa.auth.token
-
-# 2. Requst to the method of spreadsheets.get in Sheets API using `requests` module.
-            fields = "sheets(data(rowData(values(hyperlink))))"
-            url = "https://sheets.googleapis.com/v4/spreadsheets/" + si + "?ranges=" + urllib.parse.quote(cellRange) + "&fields=" + urllib.parse.quote(fields)
-            res = requests.get(url, headers={"Authorization": "Bearer " + access_token})
-
-# 3. Retrieve the hyperlink.
-            obj = res.json()
-#print(obj)
-            ob = obj["sheets"][0]['data'][0]['rowData'][0]['values'][0]['hyperlink']
-         #await c.send_video(q.from_user.id, video=ob)
-         #await c.send_document(q.from_user.id, document=ob, )
-            message = await c.send_message(q.from_user.id,"`Downloading...`")
-            start_t = datetime.now()
-            custom_file_name = unquote_plus(os.path.basename(url))
-            if "|" in url:
-             url, c_file_name = url.split("|", maxsplit=1)
-             url = ob.replace("vid.ourclg.tech","s.s4tyendra.workers.dev")
-             if c_file_name:
-                 custom_file_name = c_file_name.strip()
-            dl_loc = os.path.join("dl", custom_file_name)
-            downloader = SmartDL(url, dl_loc, progress_bar=False)
-            downloader.start(blocking=False)
-            with message.cancel_callback(downloader.stop):
-                while not downloader.isFinished():
-                    total_length = downloader.filesize if downloader.filesize else 0
-                    downloaded = downloader.get_dl_size()
-                    percentage = downloader.get_progress() * 100
-                    speed = downloader.get_speed(human=True)
-                    estimated_total_time = downloader.get_eta(human=True)
-                    progress_str = \
-                "__{}__\n" + \
-                "```[{}{}]```\n" + \
-                "**Progress** : `{}%`\n" + \
-                "**URL** : `{}`\n" + \
-                "**FILENAME** : `{}`\n" + \
-                "**Completed** : `{}`\n" + \
-                "**Total** : `{}`\n" + \
-                "**Speed** : `{}`\n" + \
-                "**ETA** : `{}`"
-                    progress_str = progress_str.format(
-                        "trying to download",
-                        ''.join(("▬"
-                                 for _ in range(math.floor(percentage / 5)))),
-                        ''.join(("▭"
-                                 for _ in range(20 - math.floor(percentage / 5)))),
-                        round(percentage, 2),
-                        url,
-                        custom_file_name,
-                        humanbytes(downloaded),
-                        humanbytes(total_length),
-                        speed,
-                        estimated_total_time)
-                    await message.edit(progress_str, disable_web_page_preview=True)
-                    await asyncio.sleep(10)
-            
-                    await client.send_document(q.from_user.id, custom_file_name)
-                    return dl_loc, (datetime.now() - start_t).seconds
+        await q.answer("not implimented")

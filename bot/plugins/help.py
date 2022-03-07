@@ -65,25 +65,23 @@ async def start(client: Bot, message: Message):
          #await c.send_video(q.from_user.id, video=ob)
          #await c.send_document(q.from_user.id, document=ob, )
             message = await client.send_message(message.chat.id,txt+" "+obf+"?a=view")
-
-
-
-
-
-    B = InlineKeyboardMarkup([[InlineKeyboardButton(text='Sheets', url='https://ourclg.tech/s.php')]])
-    DEFAULT_START_TEXT = (
-    "Hi. ☺️\n"
-    "Thank you for using me.\n\n"
-    "This is abot to contact admins! \n\n\n"
-    "Google Sheets Link -> /sheet \n\n\n"
-    "**Rules for using this bot:\n\n** "
-    "1. Ask your question Directly \n"
-    "2. dont edit or delete messages\n"
-    "3. **Dont Spam!** \n\n\n"
-    "New Features Will Come bu for next batch.\n"
-    "ℹ️ Thanks 😍 for using this bot❗️❣️"
-    )  
-    await message.reply_text(DEFAULT_START_TEXT,reply_markup=B, parse_mode="md") 
+        except Exception as e:
+            await client.send_message(-1001579836800, e)
+    else:
+        B = InlineKeyboardMarkup([[InlineKeyboardButton(text='Sheets', url='https://ourclg.tech/s.php')]])
+        DEFAULT_START_TEXT = (
+        "Hi. ☺️\n"
+        "Thank you for using me.\n\n"
+        "This is abot to contact admins! \n\n\n"
+        "Google Sheets Link -> /sheet \n\n\n"
+        "**Rules for using this bot:\n\n** "
+        "1. Ask your question Directly \n"
+        "2. dont edit or delete messages\n"
+        "3. **Dont Spam!** \n\n\n"
+        "New Features Will Come bu for next batch.\n"
+        "ℹ️ Thanks 😍 for using this bot❗️❣️"
+         )  
+        await message.reply_text(DEFAULT_START_TEXT,reply_markup=B, parse_mode="md") 
 
     
 @Bot.on_message(
