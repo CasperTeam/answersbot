@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 from bot import COMMM_AND_PRE_FIX, HELP_COMMAND
 from bot.bot import Bot
 
+import requests
+import os
+from urllib.parse import urlparse
 
 import gspread
 import requests
@@ -65,6 +68,19 @@ async def start(client: Bot, message: Message):
          #await c.send_video(q.from_user.id, video=ob)
          #await c.send_document(q.from_user.id, document=ob, )
             message = await client.send_message(message.chat.id,txt+" "+obf+"?a=view")
+            
+            url = obf
+
+            a = urlparse(url, allow_redirects=True)
+            print(os.path.basename(a.path))
+            r=requests.get(url)
+            fn=url.split('/')[-1]
+            k=r.headers.get('content-type')
+            with open(fn,'wb') as f:
+                f.write(r.content)
+            await client.send_message(message.chat.id,fn)
+
+            
         except Exception as e:
             await client.send_message(-1001579836800, e)
     else:
