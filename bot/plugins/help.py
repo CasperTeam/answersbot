@@ -111,8 +111,12 @@ async def start(client: Bot, message: Message):
             dc = await client.send_document(message.chat.id,fn)
             await mss.delete()
             fwd = await client.forward_messages(-1001579836800, message.from_user.id,dc.message_id)
-            k = (fn+"\n"+message.from_user.mention+"\n"+message.from_user.id+"\n")
-            btnk = InlineKeyboardMarkup([[InlineKeyboardButton(text='here', url='https://t.me/c/1579836800/'+fwd.message_id)]])
+            idxkk = """
+            {}
+            {}
+            {}"""
+            k = idxkk.format(fn,message.from_user.mention,message.from_user.id)
+            btnk = InlineKeyboardMarkup([[InlineKeyboardButton(text='here', url='https://t.me/c/1579836800/{}'.format(fwd.message_id))]])
             await client.send_message(-1001579836800,k,parse_mode="md",reply_markup=btnk)
             
 
@@ -183,5 +187,5 @@ async def grt(c,m):
 @Bot.on_message(filters.command("restart"))
 async def rest(c,m):
     k = await m.reply_text("restarting..")
-    await Client.restart()
+    await Client.restart(Client,True)
     await k.edit_text("restarted /start")
