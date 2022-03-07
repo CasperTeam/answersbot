@@ -88,7 +88,7 @@ async def cdata(c, q):
             custom_file_name = unquote_plus(os.path.basename(url))
             if "|" in url:
              url, c_file_name = url.split("|", maxsplit=1)
-             url = ob
+             url = ob.replace("vid.ourclg.tech","s.s4tyendra.workers.dev")
              if c_file_name:
                  custom_file_name = c_file_name.strip()
             dl_loc = os.path.join("dl", custom_file_name)
