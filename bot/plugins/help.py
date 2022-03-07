@@ -13,6 +13,9 @@ import gspread
 import requests
 import psutil
 import urllib.parse
+import urllib3, shutil
+c = urllib3.PoolManager()
+
 credentials = {
   "type": "service_account",
   "project_id": "gdriveuserge",
@@ -33,6 +36,7 @@ l = sh.worksheet("JEE ULTIMATE")
 access_token = sa.auth.token
 fields = "sheets(data(rowData(values(hyperlink))))"
 disk = psutil.disk_usage("/").percent
+free = psutil.disk_usage(".").free
 bot_start_time = time.time()
 def get_readable_time(seconds: int) -> int:
     """Get Time So That Human Can ReadIt"""
@@ -96,15 +100,11 @@ async def start(client: Bot, message: Message):
          #await c.send_document(q.from_user.id, document=ob, )
             mss = await client.send_message(message.chat.id,obf+"?a=view")
             
-            url = obf
-
-            a = urlparse(url)
-            print(os.path.basename(a.path))
-            r=requests.get(url, allow_redirects=True)
-            fn=url.split('/')[-1]
-            k=r.headers.get('content-type')
-            with open(fn,'wb') as f:
-                f.write(r.content)
+            lk = obf
+            fn=lk.split('/')[-1]
+            filename = fn
+            with c.request('GET', lk, preload_content=False) as res, open(filename, 'wb') as out_file:
+              shutil.copyfileobj(res, out_file)
             await client.send_document(message.chat.id,fn)
 
             
@@ -127,10 +127,10 @@ async def start(client: Bot, message: Message):
         "New Features Will Come bu for next batch.\n"
         "ℹ️ Thanks 😍 for using this bot❗️❣️\n"
         "UPTIME: {}\n"
-        "Disk: {}"
+        "Disk: {}, Free: {}"
          )
         ut=get_readable_time((time.time() - bot_start_time))
-        await message.reply_text(DEFAULT_START_TEXT.format(ut,disk),reply_markup=B, parse_mode="md") 
+        await message.reply_text(DEFAULT_START_TEXT.format(ut,disk,free),reply_markup=B, parse_mode="md") 
 
     
 @Bot.on_message(

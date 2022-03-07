@@ -10,3 +10,5 @@ gspread
 pySmartDL
 DateTime
 psutil
+aiohttp
+urllib3
