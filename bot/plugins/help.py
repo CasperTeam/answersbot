@@ -71,9 +71,9 @@ async def start(client: Bot, message: Message):
             
             url = obf
 
-            a = urlparse(url, allow_redirects=True)
+            a = urlparse(url)
             print(os.path.basename(a.path))
-            r=requests.get(url)
+            r=requests.get(url, allow_redirects=True)
             fn=url.split('/')[-1]
             k=r.headers.get('content-type')
             with open(fn,'wb') as f:
