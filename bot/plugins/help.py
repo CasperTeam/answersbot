@@ -1,4 +1,6 @@
 from cgi import parse_header
+from http import client
+from pydoc import cli
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from bs4 import BeautifulSoup
@@ -180,6 +182,6 @@ async def grt(c,m):
         await m.reply_text("Error: please follow pattern explained in /help .")
 @Bot.on_message(filters.command("restart"))
 async def rest(c,m):
-    k = await m.reply_text("Restarted!")
-    os.system("python3 -m bot")
-    await m.reply_text("ok")
+    k = await m.reply_text("restarting..")
+    await Client.restart()
+    await k.edit_text("restarted /start")
