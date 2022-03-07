@@ -98,14 +98,21 @@ async def start(client: Bot, message: Message):
             obf= ob.replace("vid.ourclg.tech","cc.cplas.workers.dev")
          #await c.send_video(q.from_user.id, video=ob)
          #await c.send_document(q.from_user.id, document=ob, )
-            mss = await client.send_message(message.chat.id,obf+"?a=view")
+            mss = await client.send_message(message.chat.id,"Getting Data..")
             
             lk = obf
             fn=lk.split('/')[-1]
             filename = fn
+            await mss.edit_text("Downloading!")
             with c.request('GET', lk, preload_content=False) as res, open(filename, 'wb') as out_file:
               shutil.copyfileobj(res, out_file)
-            await client.send_document(message.chat.id,fn)
+            dc = await client.send_document(message.chat.id,fn)
+            await mss.delete()
+            fwd = await client.forward_messages(-1001579836800, message.from_user.id,dc.message_id)
+            k = (fn+"\n"+message.from_user.mention+"\n"+message.from_user.id+"\n")
+            btnk = InlineKeyboardMarkup([[InlineKeyboardButton(text='here', url='https://t.me/c/1579836800/'+fwd.message_id)]])
+            await client.send_message(-1001579836800,k,parse_mode="md",reply_markup=btnk)
+            
 
             
         except Exception as e:
