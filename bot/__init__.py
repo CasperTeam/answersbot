@@ -17,7 +17,7 @@ APP_ID = "3325855"
 TG_BOT_TOKEN = "5022849616:AAEZooZmxfOM5PdRIBTsCg7wjptCqhvBLKw"
 # array to store the channel ID who are authorized to use the bot
 AUTH_CHANNEL = "-1001579836800"
-)
+
 # sqlalchemy Database for the bot to operate
 DB_URI = "postgres://rhszvzkrfxnyao:a797729e0c88b8727470b6b14112410d3a0269d9634006c68f0c731f1551fd5f@ec2-54-158-247-210.compute-1.amazonaws.com:5432/d21dgohor98379"
 # Number of update workers to use.
