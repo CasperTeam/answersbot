@@ -11,22 +11,15 @@ load_dotenv("config.env")
 
 # The Telegram API things
 # Get these values from my.telegram.org or Telegram: @useTGxBot
-API_HASH = get_config("API_HASH", should_prompt=True)
-APP_ID = get_config("APP_ID", should_prompt=True)
+API_HASH = "a0ee8fbebe1950b9291c9e22da4a1450"
+APP_ID = "3325855"
 # get a token from @BotFather
-TG_BOT_TOKEN = get_config("TG_BOT_TOKEN", should_prompt=True)
+TG_BOT_TOKEN = "5022849616:AAEZooZmxfOM5PdRIBTsCg7wjptCqhvBLKw"
 # array to store the channel ID who are authorized to use the bot
-AUTH_CHANNEL = int(get_config(
-        "AUTH_CHANNEL",
-        "-100",
-        should_prompt=True
-    )
+AUTH_CHANNEL = "-1001579836800"
 )
 # sqlalchemy Database for the bot to operate
-DB_URI = get_config(
-    "DATABASE_URL",
-    should_prompt=True
-)
+DB_URI = "postgres://rhszvzkrfxnyao:a797729e0c88b8727470b6b14112410d3a0269d9634006c68f0c731f1551fd5f@ec2-54-158-247-210.compute-1.amazonaws.com:5432/d21dgohor98379"
 # Number of update workers to use.
 # 4 is the recommended (and default) amount,
 # but your experience may vary.
